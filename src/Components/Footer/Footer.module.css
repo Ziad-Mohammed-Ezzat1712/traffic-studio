@@ -1,0 +1,11 @@
+
+.src{ 
+background-image: url(../../../Images/mobile.jpg);
+background-size: cover;      /* تجعل الصورة تغطي المساحة بدون تكرار */
+  background-position: center; /* تجعل التركيز على منتصف الصورة */
+  background-repeat: no-repeat;
+
+
+   
+
+}   

@@ -1,0 +1,53 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../../public/logo.png';
+import style from '../Footer/Footer.module.css';
+
+export default function Footer() {
+  return (
+    <footer className={`relative bg-black opacity-97 bg-center bg-cover text-white px-6 md:px-12 py-10 overflow-hidden`}>
+      <div className="relative z-10 max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Logo */}
+        <div className="flex flex-col gap-4 items-start">
+          <img src={logo} alt="Logo" className="h-40 w-auto" />
+        </div>
+
+        {/* Contact Info */}
+        <div className="text-center text-md flex flex-col items-end">
+          <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
+          <p className="mb-2">tarfficstudio@gmial.com</p>
+          <p className="mb-2">+015222222222</p>
+          <p>Egypt, Cairo</p>
+
+          {/* Social Icons */}
+          <div className="flex gap-4 mt-4 text-xl text-white">
+            <Link to="/facebook" className="hover:text-blue-500">
+              <i className="fab fa-facebook-f"></i>
+            </Link>
+            <Link to="/instagram" className="hover:text-pink-500">
+              <i className="fab fa-instagram"></i>
+            </Link>
+            <Link to="/linkedin" className="hover:text-blue-400">
+              <i className="fab fa-linkedin-in"></i>
+            </Link>
+            <Link to="/x" className="hover:text-gray-400">
+              <i className="fab fa-x-twitter"></i>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer bottom */}
+      <div className="relative z-10 mt-10 border-t border-white border-opacity-20 pt-4 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 gap-4">
+        <div className="flex items-center gap-2">
+          <span>©</span>
+          <span>Traffic Studio All Copy Right</span>
+        </div>
+        <div className="flex gap-6">
+          <Link to="#" className="hover:text-orange-500">Terms of Services</Link>
+          <Link to="#" className="hover:text-orange-500">Privacy Policy</Link>
+        </div>
+      </div>
+    </footer>
+  );
+}
