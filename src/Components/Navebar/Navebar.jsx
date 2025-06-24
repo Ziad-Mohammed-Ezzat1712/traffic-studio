@@ -78,7 +78,7 @@ export default function Navebar() {
 
         {/* Mobile menu links */}
    {isOpen && (
-  <div className="md:hidden rounded-lg shadow-md px-6 py-3 space-y-1">
+  <div className="  md:hidden rounded-lg shadow-md  space-y-1">
     <Link to="/#header" className="block text-white hover:text-orange-500">Home</Link>
     <Link to="/#portfolio" className="block text-white hover:text-orange-500">Portfolio</Link>
     <Link to="/#services" className="block text-white hover:text-orange-500">Our Services</Link>

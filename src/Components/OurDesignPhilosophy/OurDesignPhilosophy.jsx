@@ -8,14 +8,14 @@ export default function OurDesignPhilosophy() {
     {/* العنوان والنص */}
     <div className="flex flex-col md:flex-row items-start gap-8 text-center md:text-left w-full justify-center">
       {/* العنوان */}
-      <div className="text-4xl sm:text-5xl leading-tight min-w-[150px] md:min-w-[180px] space-y-2">
+      <div className=" ml-2 mr-2 text-4xl sm:text-5xl leading-tight min-w-[150px] md:min-w-[180px] space-y-2">
         <div className="font-sansita">Our</div>
         <div className="font-sansita">Design</div>
         <div className="font-sansita">Philosophy</div>
       </div>
 
       {/* الفقرات */}
-      <div className="space-y-6 mt-6 md:mt-0 font-inter max-w-5xl text-base sm:text-lg md:text-xl">
+      <div className=" ml-2 mr-2 space-y-6 mt-6 md:mt-0 font-inter max-w-5xl text-base sm:text-lg md:text-xl">
         <p className="font-bold">
           At Traffic Studio, we believe that great design is quiet, balanced, and deeply intentional. Every space we create is shaped by how people live—not just how it looks.
         At Traffic Studio, we believe that great design is quiet, balanced, and deeply intentional. Every space we create is shaped by how people live—not just how it looks.

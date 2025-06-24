@@ -5,7 +5,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 export default function Header() {
   return (
    <>
-    <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4">
+    <div className=" relative z-10 flex flex-col justify-center items-center h-full text-center px-4">
           <h1 className="text-5xl sm:text-6xl lg:text-8xl font-bold mb-4 leading-tight font-poppins p-4">
             Creative Visuals.<br />Impactful Stories.
           </h1>
