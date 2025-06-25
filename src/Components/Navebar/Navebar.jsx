@@ -78,14 +78,14 @@ export default function Navebar() {
 
         {/* Mobile menu links */}
    {isOpen && (
-  <div className="  md:hidden rounded-lg shadow-md  space-y-1">
-    <Link to="/#header" className="block text-white hover:text-orange-500">Home</Link>
+  <div className="bg-black text-md pl-4 font-semibold py-3  my-2 p-[5px] mb-2  w-[200px] md:hidden rounded-lg shadow-md  space-y-1">
+    <Link to="/#header" className=" text-white hover:text-orange-500">Home</Link>
     <Link to="/#portfolio" className="block text-white hover:text-orange-500">Portfolio</Link>
     <Link to="/#services" className="block text-white hover:text-orange-500">Our Services</Link>
     <Link to="/#about" className="block text-white hover:text-orange-500">About</Link>
     <Link to="/#testimonials" className="block text-white hover:text-orange-500">Testimonials</Link>
     <Link to="/#faqs" className="block text-white hover:text-orange-500">FAQs</Link>
-    <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-sm py-2 rounded-full transition">
+    <button className="w-3/4 mx-5 border-2   hover:bg-orange-600 text-white font-semibold text-sm py-2 shadow-md rounded-full transition">
       Get in Touch
     </button>
   </div>
