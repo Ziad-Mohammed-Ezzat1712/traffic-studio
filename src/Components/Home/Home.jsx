@@ -21,7 +21,7 @@ export default function Home() {
         className={`${style.src} mb-40 relative w-full h-lvh pb-7 bg-center text-white`}
       >
         <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
-        <Navebar />
+        <Navebar  className="" />
         <Header />
       </div>
 

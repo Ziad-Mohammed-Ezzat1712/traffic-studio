@@ -7,7 +7,7 @@ import logo2 from '../../../Images/LogoDark.png';
 
 export default function About() {
   return (
-      <section className=" bg-white w-full px-4 md:px-20 xl:px-32 pb-20">
+      <section className=" my-16 bg-white w-full px-4 md:px-20 xl:px-32 pb-20">
         <div className="w-full flex flex-col items-center mx-auto gap-16">
           {/* العنوان والنص */}
           <div className="flex flex-col md:flex-row items-start gap-0  md:text-left w-full justify-center">

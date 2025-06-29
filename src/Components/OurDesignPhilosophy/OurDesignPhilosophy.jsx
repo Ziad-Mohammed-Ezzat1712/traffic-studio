@@ -4,7 +4,7 @@ import lapPhoto from '../../../Images/lap.jpg'
 export default function OurDesignPhilosophy() {
   return (
    <>
-  <div className="w-full flex flex-col items-center mx-auto gap-16">
+  <div className="lg:my-32 w-full flex flex-col items-center mx-auto gap-16">
     {/* العنوان والنص */}
     <div className="flex flex-col md:flex-row items-start gap-8 text-center md:text-left w-full justify-center">
       {/* العنوان */}
@@ -36,15 +36,14 @@ export default function OurDesignPhilosophy() {
       />
       <div className="absolute inset-0 bg-black opacity-60 z-0" />
       <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4">
-        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-inter  leading-tight p-4 text-white">
-          Let's Work 
-          <span className=" ml-4 font-sansita">Together</span>
+        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-sansita  leading-tight p-4 text-white">
+          Let's Work Together
         </h1>
-        <p className="text-base sm:text-lg lg:text-2xl max-w-xl mb-6 px-2 text-white">
-          Are You Ready To Start Your Journey With Us At Traffic Studio?
+        <p className="text-base sm:text-lg lg:text-2xl max-w-2xl mb-6 px-2 text-white">
+         Be Ready To Start Telling Your Brand’s Stories With Us.
         </p>
-        <button className="bg-orange-500 hover:bg-orange-600 transition text-white text-lg sm:text-xl font-bold mt-2 py-3 px-6 rounded-full shadow-lg">
-          Book a Consultation
+        <button className=" bg-orange-500 hover:bg-orange-600 transition text-white text-lg sm:text-xl font-bold mt-2 py-3 px-6 rounded-full shadow-lg ">
+          Get In Touch
         </button>
       </div>
     </div>

@@ -10,7 +10,7 @@ import clientImg from '../../../Images/lap.jpg';
 
 export default function ClientTestimonials() {
   return (
-    <div className="flex justify-center">
+    <div className="lg:my-5 flex justify-center">
       <section className="max-w-screen-2xl w-full px-4 md:px-12 xl:px-32 py-10 md:py-16 bg-white text-center">
         {/* العنوان */}
         <h2 className="text-2xl md:text-3xl font-extrabold font-sansita mb-2">

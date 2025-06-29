@@ -33,7 +33,7 @@ export default function FAQs() {
 
   return (
     <div className=" max-w-7xl mx-auto py-10   px-4 mb-10 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-2 font-sansita">Frequently Asked <span className="font-sansation">Questions</span></h2>
+      <h2 className="text-3xl md:text-4xl font-bold mb-2 font-sansita">Q&A</h2>
       <p className=" text-lg mb-8">Questions? We’ve Got Answers.</p>
 
       <div className="space-y-4 text-left">

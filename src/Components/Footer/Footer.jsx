@@ -16,8 +16,10 @@ export default function Footer() {
         <div className="text-center text-md flex flex-col items-end">
           <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
           <p className="mb-2">tarfficstudio@gmial.com</p>
-          <p className="mb-2">+015222222222</p>
-          <p>Egypt, Cairo</p>
+          <p className="mb-2">+20150 0929449‬
+</p>
+          <p>2 Mohamed Zaki Barakat, 8th District, Nasr City, Cairo Governorate 
+</p>
 
           {/* Social Icons */}
           <div className="flex gap-4 mt-4 text-xl text-white">
@@ -43,10 +45,7 @@ export default function Footer() {
           <span>©</span>
           <span>Traffic Studio All Copy Right</span>
         </div>
-        <div className="flex gap-6">
-          <Link to="#" className="hover:text-orange-500">Terms of Services</Link>
-          <Link to="#" className="hover:text-orange-500">Privacy Policy</Link>
-        </div>
+  
       </div>
     </footer>
   );

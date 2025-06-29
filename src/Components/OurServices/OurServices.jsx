@@ -1,8 +1,8 @@
 import React from 'react';
-
+import motion from '../../../Images/motion.png'
 export default function OurServices() {
   return (
-    <section className="bg-white px-4 ml-0  md:px-16 xl:px-32">
+    <section className="bg-white px-4 ml-0 lg:mb-5 md:px-16 xl:px-32">
       <div className="max-w-screen-xl  mx-auto text-center">
         {/* العنوان الرئيسي */}
         <div className='mr-0  mb-10'>
@@ -10,7 +10,7 @@ export default function OurServices() {
             Our <span className='font-sansita'> Services</span>
           </h2>
           <p className="text-lg mb-12 font-inter">
-            Thoughtful Interiors Tailored to Each Space and Story
+            Each Service Is Made To Match Effectively Your Needs.
           </p>
         </div>
 
@@ -18,7 +18,7 @@ export default function OurServices() {
 <div className="mb-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
   {/* عنصر 1 */}
   <div className="hover:scale-105  bg-gray-200 text-center shadow-md rounded-xl p-10 hover:shadow-lg transition-all duration-300">
-    
+    <div><i className=" text-4xl mb-4 fa-solid fa-video"></i></div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Videography</h3>
     <p className="text-[#918888] font-inter">
       We capture high-quality video content that tells your story with clarity and creativity.
@@ -28,6 +28,7 @@ export default function OurServices() {
 
   {/* عنصر 2 */}
   <div className="hover:scale-105 bg-gray-200 text-center shadow-md rounded-xl p-10 hover:shadow-lg transition-all duration-300">
+    <div><i className="text-4xl mb-4 fa-solid fa-camera"></i></div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Photography</h3>
     <p className="text-[#918888] font-inter">
       We deliver professional photography that highlights the essence of every moment.
@@ -37,6 +38,7 @@ export default function OurServices() {
 
   {/* عنصر 3 */}
   <div className=" hover:scale-105 bg-gray-200 text-center shadow-md rounded-xl p-10 hover:shadow-lg transition-all duration-300">
+    <div><i className=" text-4xl mb-4 fa-solid fa-wand-magic-sparkles"></i> </div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Video editing</h3>
     <p className="text-[#918888] font-inter">
       We transform raw footage into polished, engaging videos through seamless editing.
@@ -46,6 +48,7 @@ export default function OurServices() {
 
   {/* عنصر 4 */}
   <div className="bg-gray-200 text-center shadow-md rounded-xl p-10 hover:shadow-lg transition-all duration-300 hover:scale-105">
+     <div className='flex justify-center items-center p-0 mb-2'> <img src={motion} alt="motion" className=' w-14 h-14 ' /></div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Motion graphics</h3>
     <p className="text-[#918888] font-inter">
       We create dynamic motion graphics that add energy and clarity to your message.

@@ -9,10 +9,11 @@ import Portfolio from './Components/Protfolio/Protfolio'
 import OurServices from './Components/OurServices/OurServices'
 import About from './Components/About/About'
 import ClientTestimonials from './Components/ClientTestimonials/ClientTestimonials'
-
-
+import ConectUs from './Components/ConectUs/ConectUs'
 let x = createBrowserRouter([
-   {index: true , element : <Home />}
+   {index: true , element : <Home />},
+   {path:"conectus" , element : <ConectUs />},
+   
   
 ])
 

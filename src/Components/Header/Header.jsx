@@ -12,8 +12,8 @@ export default function Header() {
           <p className="text-lg sm:text-xl lg:text-2xl max-w-4xl mb-6 px-2">
             Traffic Studio is a Creative Studio Bringing Stories to Life Through Video, Photography, and Motion Design.
           </p>
-          <button className="bg-orange-500 hover:bg-orange-600 transition text-white  text-2xl font-bold mt-2 py-3 px-6 rounded-full shadow-lg">
-            Book a Consultation   
+          <button className=" bg-orange-500 hover:bg-orange-600 transition text-white  text-2xl font-bold mt-2 py-3 px-6 rounded-full shadow-lg">
+            Explore Our Portfolio   
           </button>
         </div>
 
