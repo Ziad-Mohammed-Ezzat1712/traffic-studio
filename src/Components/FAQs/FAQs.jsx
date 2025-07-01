@@ -3,24 +3,24 @@ import { Plus, Minus } from "lucide-react"; // لو بتحب تستخدم أيق
 
 const faqData = [
   {
-    question: "What Types of Projects Do You Take on?",
+    question: "What kind of brands do you usually work with?",
     answer:
-      "We take on a range of creative projects including media production, videography, photography, video editing, and motion graphics — all crafted to bring your vision to life with style and precision.",
-  },
-  {
-    question: "Do you handle execution or just design?",
-    answer:
-      "We handle both design and execution depending on the client’s needs. Our goal is to provide full creative support from concept to delivery.",
-  },
-  {
-    question: "How do I begin a project with Traffic Studio?",
-    answer:
-      "You can begin by reaching out via our contact form or booking a consultation. We'll guide you through the process step-by-step.",
+      "We work with a wide range, from startups and content creators to established businesses. Whether you’re launching a product, telling your stories, or just need clean, professional visuals.",
   },
   {
     question: "How long does a typical project take?",
     answer:
-      "Project timelines vary based on scope, but we’ll provide a detailed schedule after the initial consultation.",
+      "It depends on the type of project — but generally, we deliver within 2 to 7 working days after the shoot. For urgent projects, we can always talk timelines and adjust.",
+  },
+  {
+    question: "Do you rent out your equipment or studio space?",
+    answer:
+      "We don’t rent out equipment separately, but you can book our studio, complete with tools and crew, for your project. Whether you’re coming with your own team or need full support, we’ll be there to help and make sure everything runs smoothly.",
+  },
+  {
+    question: " Can I be involved in the creative direction?",
+    answer:
+      "Absolutely. We love collaborating with our clients. You can share your ideas, references, or let us take the lead creatively. Either way, you’re part of the process.  ",
   },
 ];
 

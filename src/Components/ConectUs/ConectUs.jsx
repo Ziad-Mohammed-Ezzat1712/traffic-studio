@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Navebar from '../Navebar/Navebar'
+
 import Footer from '../Footer/Footer'
 import { Link } from 'react-router-dom';
 import logo from '../../../public/logo.png';
-import { useNavigate } from 'react-router-dom';
+
 
 export default function ContactForm() {
   const [isOpen, setIsOpen] = useState(false);
@@ -154,7 +154,7 @@ export default function ContactForm() {
       <input type="text" name="company" placeholder="Company Name (optional)" value={formData.company} onChange={handleChange}
         className="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition" />
 
-      <input type="url" name="social" placeholder="Social Media Link" required value={formData.social} onChange={handleChange}
+      <input type="url" name="social" placeholder="Social Media Link"  value={formData.social} onChange={handleChange}
         className="w-full p-3 border border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition" />
 
       {/* Service Type */}
@@ -232,7 +232,7 @@ export default function ContactForm() {
               * What type of content do you want to record?
             </label>
  {['Reels', 'Promo', 'Podcast', 'Product', 'Personal content', 'Photoshoot', 'Other'].map(item => (
-  <label key={item} className="flex items-center gap-2 text-gray-700">
+  <label key={item} className="flex items-center gap-2 text-black">
     <input
       type="radio"
       name="contentType"

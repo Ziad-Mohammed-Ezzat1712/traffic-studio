@@ -10,9 +10,9 @@ export default function About() {
       <section className=" my-16 bg-white w-full px-4 md:px-20 xl:px-32 pb-20">
         <div className="w-full flex flex-col items-center mx-auto gap-16">
           {/* العنوان والنص */}
-          <div className="flex flex-col md:flex-row items-start gap-0  md:text-left w-full justify-center">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-8 w-full justify-center">
             {/* العنوان */}
-            <div className="text-5xl font-extrabold leading-tight min-w-[180px] space-y-2">
+            <div className="text-center md:text-left mx-auto md:mx-0 text-4xl sm:text-5xl leading-tight min-w-[150px] md:min-w-[180px] space-y-2">
               <div className=''><h1 className='font-sansita'>About</h1></div>
               <div className=''><h1 className='font-sansita'>Traffic</h1></div>
               <div className=''><h1 className='font-sansita'>Studio</h1></div>
@@ -22,16 +22,10 @@ export default function About() {
             {/* الفقرات */}
             <div className="space-y-5 my-4  max-w-5xl text-lg">
               <p className='font-bold'>
-                With a focus on timeless aesthetics and subtle storytelling, we create photography
-                that captures emotion, character, and purpose — from personal moments to brand visions.
-                 With a focus on timeless aesthetics and subtle storytelling, we create photography
-                that captures emotion, character, and purpose — from personal moments to brand visions.
-                  </p>
+                At Traffic Studio 360, we don’t just shoot, we tell visual stories that reflect the true value of your brand. We’re a full production team with everything in place: a fully equipped studio, a skilled crew of videographers, photographers, editors, and creatives, all working together to bring your vision to life.
+   </p>
               <p className="text-gray-500 text-base">
-                Dedicated to minimal style and meaningful visuals, our studio crafts photography
-                that tells stories — blending artistry with authenticity for brands, people, and
-                moments that matter.
-              </p>
+              From sharp visuals to powerful narratives, we create content that connects, elevates, and performs. Whether it’s a branded video, a social campaign, or a full ad production — we’re here to deliver it seamlessly, professionally, and with style. </p>
             </div>
           </div>
 

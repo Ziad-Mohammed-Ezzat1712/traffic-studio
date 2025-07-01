@@ -21,9 +21,7 @@ export default function OurServices() {
     <div><i className=" text-4xl mb-4 fa-solid fa-video"></i></div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Videography</h3>
     <p className="text-[#918888] font-inter">
-      We capture high-quality video content that tells your story with clarity and creativity.
-      From events to brand films, our videography brings moments to life with style and precision.
-    </p>
+      Bring your brand to life through dynamic visuals that tell a story. From product shoots to full-scale commercials, our videography team captures every moment, style, and purpose — tailored to your goals and audience.</p>
   </div>
 
   {/* عنصر 2 */}
@@ -31,9 +29,8 @@ export default function OurServices() {
     <div><i className="text-4xl mb-4 fa-solid fa-camera"></i></div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Photography</h3>
     <p className="text-[#918888] font-inter">
-      We deliver professional photography that highlights the essence of every moment.
-      Whether it’s products, people, or spaces — we capture visuals that speak for themselves.
-    </p>
+      Clean, crisp, and crafted to fit your brand. Whether it’s portraits, products, events, or lifestyle shots, we deliver high-quality imagery that grabs attention and keeps your content looking sharp across platforms.
+ </p>
   </div>
 
   {/* عنصر 3 */}
@@ -41,9 +38,7 @@ export default function OurServices() {
     <div><i className=" text-4xl mb-4 fa-solid fa-wand-magic-sparkles"></i> </div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Video editing</h3>
     <p className="text-[#918888] font-inter">
-      We transform raw footage into polished, engaging videos through seamless editing.
-      Every cut, sound, and effect is crafted to enhance your story and captivate your audience.
-    </p>
+     It’s not just about cutting clips — it’s about building flow, mood, and message. We turn raw footage into compelling content, blending visuals, audio, and pacing to create videos that actually connect and convert. </p>
   </div>
 
   {/* عنصر 4 */}
@@ -51,9 +46,7 @@ export default function OurServices() {
      <div className='flex justify-center items-center p-0 mb-2'> <img src={motion} alt="motion" className=' w-14 h-14 ' /></div>
     <h3 className="text-xl font-bold mb-2 font-sansita">Motion graphics</h3>
     <p className="text-[#918888] font-inter">
-      We create dynamic motion graphics that add energy and clarity to your message.
-      From animated logos to explainer videos, we bring visuals to life with movement and meaning.
-    </p>
+      Add movement, meaning, and magic. From animated text to full explainer videos, our motion graphics enhance your content with custom visuals that simplify ideas, amplify branding, and engage your audience. </p>
   </div>
 </div>
 
