@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // استيراد الصور
 import img1 from '../../../Images/99.png';
@@ -48,23 +48,40 @@ export default function Portfolio() {
 
         {/* شبكة الصور */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-          {projects.map((project, index) => (
-            <div
-              key={index}
-              className="relative overflow-hidden rounded-xl shadow-sm transform transition-transform duration-300 hover:scale-105 md:hover:scale-110 group"
-            >
-              <img
-                src={project.img}
-                alt={`portfolio-${index + 1}`}
-                className="w-full h-[430px] object-cover rounded-xl"
-              />
-              {/* طبقة ال hover */}
-              <div className="absolute bottom-0 left-0 w-full h-1/4   bg-black opacity-90 flex flex-col justify-center items-start p-4 transform translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-b-xl">
-                <h1 className="text-white text-xl font-bold mb-1">{project.title}</h1>
-                <p className="text-white text-sm">{project.description}</p>
+          {projects.map((project, index) => {
+            const [isActive, setIsActive] = useState(false);
+
+            const handleTouch = () => {
+              setIsActive(!isActive);
+            };
+
+            return (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-xl shadow-sm transform transition-transform duration-300 hover:scale-105 md:hover:scale-110 group"
+                onTouchStart={handleTouch}
+              >
+                <img
+                  src={project.img}
+                  alt={`portfolio-${index + 1}`}
+                  className="w-full h-[430px] object-cover rounded-xl"
+                />
+                {/* طبقة ال hover / tap */}
+                <div
+                  className={`
+                    absolute bottom-0 left-0 w-full h-1/4 bg-black opacity-90
+                    flex flex-col justify-center items-start p-4 transform
+                    transition-all duration-500 ease-in-out rounded-b-xl
+                    ${isActive ? 'translate-y-0' : 'translate-y-full'}
+                    group-hover:translate-y-0
+                  `}
+                >
+                  <h1 className="text-white text-xl font-bold mb-1">{project.title}</h1>
+                  <p className="text-white text-sm">{project.description}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>
