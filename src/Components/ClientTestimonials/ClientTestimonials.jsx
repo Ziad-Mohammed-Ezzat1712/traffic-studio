@@ -21,7 +21,7 @@ export default function ClientTestimonials() {
         </p>
 
         {/* السلايدر */}
-        <div className="bg-black rounded-xl px-6 py-6 md:p-10 relative">
+        <div className="bg-black rounded-xl px-2 py-6 md:p-10 relative">
           <Swiper
             modules={[Navigation, Pagination, A11y]}
             spaceBetween={30}
@@ -34,7 +34,8 @@ export default function ClientTestimonials() {
           >
             {[1, 2, 3, 4].map((_, index) => (
               <SwiperSlide key={index}>
-                <div className="bg-white p-4 md:p-6 rounded-xl mx-auto max-w-sm md:max-w-md flex flex-col justify-between h-full text-left shadow-sm">
+                <div className="bg-white  p-4 md:p-6 rounded-xl mx-auto max-w-[80%] sm:max-w-sm  md:max-w-md flex flex-col justify-between h-full text-left shadow-sm">
+
                   <p className="text-sm text-black mb-4 font-inter leading-relaxed">
                     “Professional From Start To Finish. The Space Planning Elevated Our Office Flow In Ways We Never Imagined.”
                   </p>
@@ -55,46 +56,68 @@ export default function ClientTestimonials() {
           </Swiper>
 
           {/* تخصيص الأسهم والبوينتس */}
-          <style>
-            {`
-              .swiper-button-next,
-              .swiper-button-prev {
-                width: 28px;
-                height: 28px;
-                background-color: #d1d5db;
-                color: white;
-                border-radius: 9999px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-              }
+         <style>
+{`
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 28px;
+    height: 28px;
+    background-color: #d1d5db;
+    color: white;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 
-              .swiper-button-next::after,
-              .swiper-button-prev::after {
-                font-size: 12px;
-                font-weight: bold;
-              }
+  .swiper-button-prev {
+    left: 10px;
+  }
 
-              .swiper-pagination-bullet {
-                width: 12px;
-                height: 12px;
-                background-color: #ffffff;
-                opacity: 0.5;
-                border-radius: 50%;
-                margin: 0 6px;
-              }
+  .swiper-button-next {
+    right: 10px;
+  }
 
-              .swiper-pagination-bullet-active {
-                background-color: #FF6F1F;
-                opacity: 1;
-              }
+  /* على الشاشات الصغيرة نحركهم برا المحتوى الأبيض */
+  @media (max-width: 767px) {
+    .swiper-button-prev {
+      left: 0px;  حسب المسافة المناسبة */
+    }
 
-              .swiper-pagination {
-                bottom: -20px !important;
-                margin-top: 16px;
-              }
-            `}
-          </style>
+    .swiper-button-next {
+      right: 0px;
+    }
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    opacity: 0.5;
+    border-radius: 50%;
+    margin: 0 6px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #FF6F1F;
+    opacity: 1;
+  }
+
+  .swiper-pagination {
+    bottom: -20px !important;
+    margin-top: 16px;
+  }
+`}
+</style>
+
         </div>
       </section>
     </div>
