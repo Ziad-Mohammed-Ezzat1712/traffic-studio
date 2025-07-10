@@ -11,12 +11,20 @@ import About from './Components/About/About'
 import ClientTestimonials from './Components/ClientTestimonials/ClientTestimonials'
 import ConectUs from './Components/ConectUs/ConectUs'
 import AllProjects from './Components/AllProjects/AllProjects'
-import AdminDashboard from './Components/AdminDashboard/AdminDashboard'
+import DashboardLayout from './Components/DashboardLayout/DashboardLayout'
+import ProductsDashboard from './Components/ProductsDashboard/ProductsDashboard'
+
 let x = createBrowserRouter([
    {index: true , element : <Home />},
    {path:"conectus" , element : <ConectUs />},
    {path:"allproject", element : <AllProjects/>},
-  { path:"/admin", element:<AdminDashboard />} 
+  {
+    path: 'admin',
+    element: <DashboardLayout /> ,
+    children: [
+      { path: 'products', element: <ProductsDashboard /> }
+    ]
+  }
 
 ])
 

@@ -17,9 +17,9 @@ export default function AllProjects() {
     <nav className="bg-black  opacity-97 w-full z-20 top-0 left-0 py-4 px-4 md:px-8 lg:px-16  ">
            <div className="max-w-screen-2xl mx-auto flex items-center justify-between">
              {/* Logo */}
-             <Link to="/">
+             <span >
                <img src={logo} alt="Logo" className="h-16  w-auto" />
-             </Link>
+             </span>
    
              {/* Nav links (centered) */}
              <div className="hidden md:flex  justify-center flex-1">
