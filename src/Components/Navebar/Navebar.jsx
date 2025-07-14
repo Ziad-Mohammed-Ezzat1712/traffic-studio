@@ -88,9 +88,11 @@ export default function Navebar() {
     <Link to="/#portfolio" className="block text-white hover:text-orange-500">Portfolio</Link>
     <Link to="/#testimonials" className="block text-white hover:text-orange-500">Testimonials</Link>
     <Link to="/#faqs" className="block text-white hover:text-orange-500">Q&A</Link>
-    <button className="w-3/4 mx-5  bg-orange-500  hover:bg-transparent hover:text-orange-500 text-white font-semibold text-sm py-2 shadow-md rounded-full transition">
+<Link to="/conectus">
+<button className="w-3/4 mx-5  bg-orange-500  hover:bg-transparent hover:text-orange-500 text-white font-semibold text-sm py-2 shadow-md rounded-full transition">
        Let’s Talk
-    </button>
+</button>
+     </Link>
   </div>
 )}
 

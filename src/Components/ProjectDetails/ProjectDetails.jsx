@@ -1,33 +1,37 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import Footer from '../Footer/Footer';
-import { Link } from 'react-router-dom';
 import logo from '../../../public/logo.png';
 
-export default function AllProjects() {
-  const [projects, setProjects] = useState([]);
+export default function ProjectDetails() {
+  const { id } = useParams();
+  const [project, setProject] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    axios.get('https://trafficstudio360.com/projects/allProjects.php')
-      .then(response => {
-        const data = response.data;
-        if (data.status === 200 && Array.isArray(data.data)) {
-          setProjects(data.data);
+    axios
+      .get(`https://trafficstudio360.com/projects/viewOneProject.php?id=${id}`)
+      .then((response) => {
+        if (response.data.status === 200 && response.data.data) {
+          setProject(response.data.data);
         } else {
-          console.error("Unexpected data format:", data);
-          setProjects([]);
+          console.error('Unexpected response:', response.data);
         }
       })
-      .catch(error => {
-        console.error('Error fetching projects:', error);
+      .catch((error) => {
+        console.error('Error fetching project:', error);
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [id]);
+
+  const galleryImages = Array.isArray(project?.media_files) && project.media_files.length > 0
+    ? project.media_files.map((img) => `https://trafficstudio360.com/${img.trim()}`)
+    : [];
 
   const Navbar = (
     <nav className="bg-black opacity-97 w-full z-20 top-0 left-0 py-4 px-4 md:px-8 lg:px-16">
@@ -75,11 +79,11 @@ export default function AllProjects() {
           <Link to="/#portfolio" className="text-white hover:text-orange-500 block">Portfolio</Link>
           <Link to="/#testimonials" className="text-white hover:text-orange-500 block">Testimonials</Link>
           <Link to="/#faqs" className="text-white hover:text-orange-500 block">Q&A</Link>
-        <Link to="/conectus">
-        <button className="w-3/4 mx-5  bg-orange-500  hover:bg-transparent hover:text-orange-500 text-white font-semibold text-sm py-2 shadow-md rounded-full transition">
-               Let’s Talk
-        </button>
-             </Link>
+          <Link to="/conectus">
+          <button className="w-3/4 mx-5  bg-orange-500  hover:bg-transparent hover:text-orange-500 text-white font-semibold text-sm py-2 shadow-md rounded-full transition">
+                 Let’s Talk
+          </button>
+               </Link>
         </div>
       )}
     </nav>
@@ -89,8 +93,20 @@ export default function AllProjects() {
     return (
       <>
         {Navbar}
-        <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="min-h-screen flex items-center justify-center">
           <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-orange-500"></div>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
+  if (!project) {
+    return (
+      <>
+        {Navbar}
+        <div className="min-h-screen flex items-center justify-center text-2xl font-bold text-red-600">
+          Project Not Found ❌
         </div>
         <Footer />
       </>
@@ -100,34 +116,50 @@ export default function AllProjects() {
   return (
     <>
       {Navbar}
+      <div className="min-h-screen px-6 md:px-16 py-20 flex flex-col items-center justify-start bg-white">
+        <div className="w-full max-w-8xl">
+          <div className="flex flex-col md:flex-row items-start gap-10">
+            <div className="w-full md:w-1/2">
+              <img
+                src={`https://trafficstudio360.com/${project.file_path}`}
+                alt={project.title}
+                className="max-w-[600px] w-full h-90 rounded-xl shadow-lg object-cover"
+              />
+            </div>
 
-      <div className="px-4 md:px-10 py-10">
-        <h2 className="text-3xl font-bold text-orange-600 mb-6 text-center">All Projects</h2>
+            <div className="w-full md:w-3/4 space-y-4">
+              <h1 className="text-3xl font-bold text-orange-600">{project.title}</h1>
+              <p className="text-gray-700 leading-relaxed">{project.description}</p>
+              <div className="text-sm  space-y-1">
+                <p><span className="font-semibold">Category:</span> {project.category_name}</p>
+              </div>
+              <div><p><span className="font-semibold">uploaded_at:</span> {project.uploaded_at}</p></div>
+            </div>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {projects.length > 0 ? (
-            projects.map((proj) => (
-              <Link to={`/project/${proj.id}`} key={proj.id} className="block w-full">
-                <div className="border rounded-xl shadow hover:shadow-lg transition p-4 flex flex-col items-center text-center hover:scale-105 duration-300">
+          {galleryImages.length > 0 && (
+            <div className="mt-10">
+              <h2 className="text-xl font-semibold mb-4 text-orange-600">More From This Project</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {galleryImages.map((img, idx) => (
                   <img
-                    src={`https://trafficstudio360.com/${proj.file_path}`}
-                    alt={proj.title}
-                    className="w-full h-40 object-cover rounded mb-4"
+                    key={idx}
+                    src={img}
+                    alt={`gallery-${idx}`}
+                    className="w-full aspect-square object-cover rounded-lg shadow-sm hover:scale-105 transition-transform duration-300"
                   />
-                  <h3 className="font-semibold text-lg mb-1">{proj.title}</h3>
-                  <p className="text-sm text-gray-600 mb-2">{proj.description}</p>
-                  <span className="text-xs text-orange-500 font-semibold uppercase">
-                    {proj.category_name}
-                  </span>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <p className="text-center text-gray-500 col-span-full">لا توجد مشاريع للعرض</p>
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </div>
 
+      <div className='mb-10 ml-15'><Link to="/allproject">
+                  <button className="border bg-orange-500 text-white font-bold rounded-full px-6 py-2 hover:bg-orange-600 hover:text-white transition duration-300 flex items-center gap-2">
+                    View All Projects
+                  </button>
+                </Link></div>
       <Footer />
     </>
   );

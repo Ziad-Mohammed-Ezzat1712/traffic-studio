@@ -1,42 +1,35 @@
-import React, { useState } from 'react';
-
-// استيراد الصور
-import img1 from '../../../Images/99.png';
-import img2 from '../../../Images/protfolio2.jpg';
-import img3 from '../../../Images/protfolio3.jpg';
-import img4 from '../../../Images/protfolio4.jpg';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Portfolio() {
-  const projects = [
-    {
-      img: img1,
-      title: 'Everest cloud photoshoot',
-      description: 'Everest Cloud is a vape liquid that features a variety of flavors and tastes to suit different tastes, from fruits to tobacco and more.',
-    },
-    {
-      img: img2,
-      title: 'Social Media Design',
-      description: 'Creative designs for social platforms.',
-    },
-    {
-      img: img3,
-      title: 'Web Design',
-      description: 'Responsive and modern web interfaces.',
-    },
-    {
-      img: img4,
-      title: 'Motion Graphics',
-      description: 'Animated visuals to tell your story.',
-    },
-  ];
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // ⬅️ جديد
+
+  useEffect(() => {
+    setIsLoading(true); // ⬅️ يبدأ التحميل
+    axios.get('https://trafficstudio360.com/projects/allProjects.php')
+      .then(response => {
+        if (response.data?.data) {
+          setProjects(response.data.data.slice(0, 4));
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching projects:', error);
+      })
+      .finally(() => {
+        setIsLoading(false); // ⬅️ انتهى التحميل
+      });
+  }, []);
 
   return (
     <div className="lg:my-5 flex justify-center">
       <section className="w-full max-w-screen-2xl px-4 md:px-16 xl:px-32 py-12 bg-white">
+        
         {/* العنوان والزر */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
-          <h2 className="text-3xl md:text-4xl font-sansita font-extrabold ">
+          <h2 className="text-3xl md:text-4xl font-sansita font-extrabold">
             Our <span className="font-sansita">Portfolio</span>
           </h2>
           <Link to="/allproject">
@@ -46,43 +39,37 @@ export default function Portfolio() {
           </Link>
         </div>
 
-        {/* شبكة الصور */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-          {projects.map((project, index) => {
-            const [isActive, setIsActive] = useState(false);
-
-            const handleTouch = () => {
-              setIsActive(!isActive);
-            };
-
-            return (
-              <div
-                key={index}
-                className="relative overflow-hidden rounded-xl shadow-sm transform transition-transform duration-300 hover:scale-105 md:hover:scale-110 group"
-                onTouchStart={handleTouch}
-              >
-                <img
-                  src={project.img}
-                  alt={`portfolio-${index + 1}`}
-                  className="w-full h-[430px] object-cover rounded-xl"
-                />
-                {/* طبقة ال hover / tap */}
+        {/* ✅ عرض الـ Spinner أثناء التحميل */}
+        {isLoading ? (
+          <div className="flex justify-center items-center min-h-[200px]">
+            <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-orange-500"></div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+            {projects.map((project, index) => (
+              <Link to={`/project/${project.id}`} key={project.id}>
                 <div
-                  className={`
-                    absolute bottom-0 left-0 w-full h-1/4 bg-black opacity-90
-                    flex flex-col justify-center items-start p-4 transform
-                    transition-all duration-500 ease-in-out rounded-b-xl
-                    ${isActive ? 'translate-y-0' : 'translate-y-full'}
-                    group-hover:translate-y-0
-                  `}
+                  className="relative overflow-hidden rounded-xl shadow-sm transform transition-transform duration-300 hover:scale-105 md:hover:scale-110 group"
+                  onTouchStart={() => setActiveIndex(index)}
                 >
-                  <h1 className="text-white text-xl font-bold mb-1">{project.title}</h1>
-                  <p className="text-white text-sm">{project.description}</p>
+                  <img
+                    src={`https://trafficstudio360.com/${project.file_path}`}
+                    alt={`portfolio-${index + 1}`}
+                    className="w-full h-[430px] object-cover rounded-xl"
+                  />
+                  <div
+                    className={`absolute bottom-0 left-0 w-full h-1/4 bg-black opacity-90 flex flex-col justify-center items-start p-4 transform transition-all duration-500 ease-in-out rounded-b-xl ${
+                      activeIndex === index ? 'translate-y-0' : 'translate-y-full'
+                    } group-hover:translate-y-0`}
+                  >
+                    <h1 className="text-white text-xl font-bold mb-1">{project.title}</h1>
+                    <p className="text-white text-sm">{project.description}</p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
     </div>
   );
