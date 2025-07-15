@@ -6,6 +6,7 @@ import logo from '../../../public/logo.png';
 
 export default function ProjectDetails() {
   const { id } = useParams();
+  const [selectedImage, setSelectedImage] = useState(null);
   const [project, setProject] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -123,35 +124,48 @@ export default function ProjectDetails() {
               <img
                 src={`https://trafficstudio360.com/${project.file_path}`}
                 alt={project.title}
-                className="max-w-[600px] w-full h-90 rounded-xl shadow-lg object-cover"
+                className="max-w-[600px] w-full h-90  rounded-xl shadow-lg object-contain "
               />
             </div>
 
-            <div className="w-full md:w-3/4 space-y-4">
-              <h1 className="text-3xl font-bold text-orange-600">{project.title}</h1>
-              <p className="text-gray-700 leading-relaxed">{project.description}</p>
+            <div className="w-full my-16 md:w-3/4 space-y-10">
+              <h1 className="text-3xl font-bold text-orange-600"><span className=" text-3xl text-orange-600 font-semibold ">Title : </span>{project.title}</h1>
+              <p className="text-gray-700 leading-relaxed"> <span className=" text-xl text-black font-semibold ">Description : </span> {project.description}</p>
               <div className="text-sm  space-y-1">
-                <p><span className="font-semibold">Category:</span> {project.category_name}</p>
+                <span className=" text-xl text-black font-semibold "><span className=" text-xl text-black font-semibold ">category : </span> {project.category_name}</span>
               </div>
-              <div><p><span className="font-semibold">uploaded_at:</span> {project.uploaded_at}</p></div>
+             
             </div>
           </div>
+{galleryImages.length > 0 && (
+  <div className="mt-10">
+    <h2 className="text-xl font-semibold mb-4 text-orange-600">More From This Project</h2>
+    <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      {galleryImages.map((media, idx) => {
+        const isVideo = media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.mov');
+        return (
+          <div key={idx} className="w-full aspect-square overflow-hidden rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 cursor-pointer">
+            {isVideo ? (
+              <video
+                src={media}
+                controls
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src={media}
+                alt={`gallery-${idx}`}
+                onClick={() => setSelectedImage(media)}
+                className="w-full h-full object-cover"
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+)}
 
-          {galleryImages.length > 0 && (
-            <div className="mt-10">
-              <h2 className="text-xl font-semibold mb-4 text-orange-600">More From This Project</h2>
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                {galleryImages.map((img, idx) => (
-                  <img
-                    key={idx}
-                    src={img}
-                    alt={`gallery-${idx}`}
-                    className="w-full aspect-square object-cover rounded-lg shadow-sm hover:scale-105 transition-transform duration-300"
-                  />
-                ))}
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
@@ -161,6 +175,25 @@ export default function ProjectDetails() {
                   </button>
                 </Link></div>
       <Footer />
+
+      {selectedImage && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+    onClick={() => setSelectedImage(null)}
+  >
+    <img
+      src={selectedImage}
+      alt="Full View"
+      className="max-w-[90%] max-h-[90%] rounded-xl shadow-lg transition-transform duration-300"
+    />
+    <button
+      onClick={() => setSelectedImage(null)}
+      className="absolute top-5 right-5 text-white text-3xl font-bold hover:text-red-500"
+    >
+      ×
+    </button>
+  </div>
+)}
     </>
   );
 }

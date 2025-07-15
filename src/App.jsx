@@ -12,6 +12,7 @@ import NotFound from './Components/NotFound/NotFound';
 import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 import AdminLogin from './Components/AdminLogin/AdminLogin';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
+import ViewBooking from './Components/ViewBooking/ViewBooking';
 
 let x = createBrowserRouter([
   { index: true, element: <Home /> },
@@ -20,6 +21,7 @@ let x = createBrowserRouter([
   { path: "*", element: <NotFound /> },
   { path: "/project/:id", element: <ProjectDetails /> },
   { path: "/admin/login", element: <AdminLogin /> },
+    
 
   {
     path: '/admin/dashboard',
@@ -29,7 +31,8 @@ let x = createBrowserRouter([
       </ProtectedRoute>
     ),
     children: [
-      { path: 'products', element: <ProductsDashboard /> }
+      { path: 'products', element: <ProductsDashboard /> },
+      { path: 'booking', element: <ViewBooking /> }
     ]
   }
 ]);

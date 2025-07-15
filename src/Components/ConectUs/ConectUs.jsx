@@ -3,9 +3,11 @@ import axios from 'axios';
 import Footer from '../Footer/Footer';
 import { Link } from 'react-router-dom';
 import logo from '../../../public/logo.png';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function ContactForm() {
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -41,6 +43,7 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+setLoading(true);
 
     try {
       if (!formData.name.trim()) {
@@ -91,7 +94,8 @@ export default function ContactForm() {
         return;
       }
 
-      alert('تم إرسال الطلب بنجاح! شكراً لتواصلك معنا.');
+           toast.success('Booking submitted successfully! Thank you for contacting us.');
+
 
       setFormData({
         name: '',
@@ -113,13 +117,16 @@ export default function ContactForm() {
       });
 
     } catch (error) {
-      alert('حدث خطأ في الاتصال. الرجاء المحاولة مرة أخرى.');
+     toast.error('An error occurred. Please try again later.');
       console.error(error.response?.data || error.message);
-    }
+    }finally {
+  setLoading(false);
+}
   };
 
   return (
     <>
+    <ToastContainer />
      <nav className="bg-black opacity-97 w-full z-20 top-0 left-0 py-4 px-4 md:px-8 lg:px-16">
                    <div className="max-w-screen-2xl mx-auto flex items-center justify-between">
                      <span>
@@ -321,11 +328,21 @@ export default function ContactForm() {
           </div>
         )}
 
-        <button type="submit" className="w-full bg-orange-500 text-white font-semibold p-3 rounded-lg hover:bg-orange-600 transition-all">
-          Submit
-        </button>
+      <button
+  type="submit"
+  disabled={loading}
+  className="w-full bg-orange-500 text-white font-semibold p-3 rounded-lg hover:bg-orange-600 transition-all flex items-center justify-center gap-2"
+>
+  {loading ? (
+    <>
+      <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full inline-block"></span>
+      <span>Sending...</span>
+    </>
+  ) : (
+    'Book Now'
+  )}
+</button>
       </form>
-
       <Footer />
     </>
   );

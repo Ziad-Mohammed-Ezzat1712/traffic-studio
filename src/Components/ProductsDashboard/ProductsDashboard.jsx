@@ -12,10 +12,11 @@ export default function ProductsDashboard() {
   });
   const [mainFile, setMainFile] = useState(null);
   const [mediaFiles, setMediaFiles] = useState([]);
+  const [previewMedia, setPreviewMedia] = useState([]);
   const [projects, setProjects] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
-  const [loading, setLoading] = useState(false); // لودينج
+  const [loading, setLoading] = useState(false);
 
   const fetchProjects = async () => {
     try {
@@ -23,7 +24,7 @@ export default function ProductsDashboard() {
       if (res.data.status === 200) {
         setProjects(res.data.data);
       }
-    } catch (err) {
+    } catch {
       toast.error('فشل تحميل المشاريع');
     }
   };
@@ -37,11 +38,33 @@ export default function ProductsDashboard() {
   };
 
   const handleMainFileChange = (e) => {
-    setMainFile(e.target.files[0]);
+    const file = e.target.files[0];
+    setMainFile(file);
   };
 
   const handleMediaFilesChange = (e) => {
-    setMediaFiles([...e.target.files]);
+    const files = Array.from(e.target.files);
+    const newPreviews = files.map(file => ({
+      file,
+      preview: URL.createObjectURL(file),
+      type: file.type.startsWith('video') ? 'video' : 'image',
+      existing: false,
+    }));
+
+    setMediaFiles(prev => [...prev, ...files]);
+    setPreviewMedia(prev => [...prev, ...newPreviews]);
+  };
+
+  const handleRemovePreview = (indexToRemove) => {
+    setPreviewMedia(prev => {
+      const updated = [...prev];
+      if (!updated[indexToRemove].existing) {
+        setMediaFiles((prevFiles) => prevFiles.filter((_, i) => i !== indexToRemove));
+      }
+      URL.revokeObjectURL(updated[indexToRemove].preview);
+      updated.splice(indexToRemove, 1);
+      return updated;
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -58,10 +81,11 @@ export default function ProductsDashboard() {
     formData.append('description', form.description);
     formData.append('category_name', form.category_name);
     formData.append('media_type', form.media_type);
-    if (mainFile) formData.append('file', mainFile);
-   mediaFiles
-  .filter(f => !(mainFile && f.name === mainFile.name && f.size === mainFile.size))
-  .forEach((file) => formData.append('media_files[]', file));
+    if (mainFile && mainFile.name) formData.append('file', mainFile);
+
+    mediaFiles.forEach(file => {
+      formData.append('media_files[]', file);
+    });
 
     try {
       let res;
@@ -71,7 +95,6 @@ export default function ProductsDashboard() {
           Authorization: `Bearer ${token}`,
         },
       };
-
 
       if (isEditing) {
         formData.append('id', editId);
@@ -87,17 +110,41 @@ export default function ProductsDashboard() {
       } else {
         toast.error(res.data.message || 'حدث خطأ');
       }
-    } catch (error) {
+    } catch {
       toast.error('خطأ في الاتصال');
     } finally {
       setLoading(false);
     }
   };
-  const handleLogout = () => {
-  localStorage.removeItem('adminToken');
-  window.location.href = '/admin/login'; // أو أي صفحة login عندك
-};
 
+  const handleEdit = (project) => {
+    setForm({
+      title: project.title,
+      description: project.description,
+      category_name: project.category_name,
+      media_type: project.media_type,
+    });
+
+    setIsEditing(true);
+    setEditId(project.id);
+
+    if (project.file_path) {
+      const fullCover = `https://trafficstudio360.com/${project.file_path}`;
+      setMainFile({ preview: fullCover });
+    }
+
+    if (project.first_media && Array.isArray(project.first_media)) {
+      const existingPreviews = project.first_media.map((file) => ({
+        preview: `https://trafficstudio360.com/${file}`,
+        type: file.endsWith('.mp4') || file.endsWith('.webm') ? 'video' : 'image',
+        existing: true,
+      }));
+      setPreviewMedia(existingPreviews);
+      setMediaFiles([]);
+    }
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const resetForm = () => {
     setForm({
@@ -108,63 +155,56 @@ export default function ProductsDashboard() {
     });
     setMainFile(null);
     setMediaFiles([]);
-    document.getElementById('mainFile').value = null;
-    document.getElementById('mediaFiles').value = null;
+    setPreviewMedia([]);
     setIsEditing(false);
     setEditId(null);
+    document.getElementById('mainFile').value = null;
+    document.getElementById('mediaFiles').value = null;
   };
 
-  const handleEdit = (project) => {
-    setForm({
-      title: project.title,
-      description: project.description,
-      category_name: project.category_name,
-      media_type: project.media_type,
-    });
-    setIsEditing(true);
-    setEditId(project.id);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const handleDelete = async (id) => {
+    const token = localStorage.getItem('adminToken');
+    if (window.confirm('هل أنت متأكد من حذف المشروع؟')) {
+      try {
+        const formData = new FormData();
+        formData.append('id', id);
 
- const handleDelete = async (id) => {
-  const token = localStorage.getItem('adminToken');
-  if (window.confirm('هل أنت متأكد من حذف المشروع؟')) {
-    try {
-      const formData = new FormData();
-      formData.append('id', id);
-
-      const res = await axios.post(
-        'https://trafficstudio360.com/projects/delete.php',
-        formData,
-        {
-          headers: { Authorization: `Bearer ${token}` },
+        const res = await axios.post(
+          'https://trafficstudio360.com/projects/delete.php',
+          formData,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        if (res.data.status === 200) {
+          toast.success('تم الحذف بنجاح');
+          fetchProjects();
+        } else {
+          toast.error(res.data.message || 'فشل في الحذف');
         }
-      );
-      if (res.data.status === 200) {
-        toast.success('تم الحذف بنجاح');
-        fetchProjects();
-      } else {
-        toast.error(res.data.message || 'فشل في الحذف');
+      } catch {
+        toast.error('خطأ في الاتصال');
       }
-    } catch {
-      toast.error('خطأ في الاتصال');
     }
-  }
-};
+  };
 
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    window.location.href = '/admin/login';
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-10">
       <ToastContainer />
       <div className="flex justify-between items-center mb-6">
-  <h1 className="text-2xl font-bold">{isEditing ? 'Edit Project' : 'Add New Project'}</h1>
-  <button
-    onClick={handleLogout}
-    className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition"
-  >
-    Logout
-  </button>
-</div>
+        <h1 className="text-2xl font-bold">{isEditing ? 'Edit Project' : 'Add New Project'}</h1>
+        <button
+          onClick={handleLogout}
+          className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition"
+        >
+          Logout
+        </button>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4 bg-white p-6 rounded-xl shadow-md mb-10">
         <div>
@@ -190,24 +230,23 @@ export default function ProductsDashboard() {
         </div>
 
         <div>
-  <label className="block mb-1">Category</label>
-  <select
-    name="category_name"
-    className="w-full border rounded-lg px-4 py-2"
-    value={form.category_name}
-    onChange={handleChange}
-  >
-    <option value="">-- Choose Category --</option>
-    <option value="Motion Graphics">Motion Graphics</option>
-    <option value="Video Editing">Video Editing</option>
-    <option value="Videography">Videography</option>
-    <option value="Photography">Photography</option>
-  </select>
-</div>
-
+          <label className="block mb-1">Category</label>
+          <select
+            name="category_name"
+            className="w-full border rounded-lg px-4 py-2"
+            value={form.category_name}
+            onChange={handleChange}
+          >
+            <option value="">-- Choose Category --</option>
+            <option value="Motion Graphics">Motion Graphics</option>
+            <option value="Video Editing">Video Editing</option>
+            <option value="Videography">Videography</option>
+            <option value="Photography">Photography</option>
+          </select>
+        </div>
 
         <div>
-          <label className="block mb-1">Media_Type</label>
+          <label className="block mb-1">Media Type</label>
           <select
             name="media_type"
             className="w-full border rounded-lg px-4 py-2"
@@ -220,13 +259,43 @@ export default function ProductsDashboard() {
         </div>
 
         <div>
-          <label className="block mb-1"> ImageCover</label>
-          <input type="file" id="mainFile" accept="image/*" onChange={handleMainFileChange} />
+          <label className="block mb-1">Image Cover</label>
+          <input type="file" id="mainFile" accept="image/*,video/*" onChange={handleMainFileChange} />
+          {mainFile?.preview && (
+            <img src={mainFile.preview} alt="cover" className="w-32 h-32 mt-2 object-cover rounded" />
+          )}
         </div>
 
         <div>
-          <label className="block mb-1"> Images</label>
-          <input type="file" id="mediaFiles" multiple accept="image/*" onChange={handleMediaFilesChange} />
+          <label className="block mb-1">Images or Videos</label>
+          <input
+            type="file"
+            id="mediaFiles"
+            multiple
+            accept="image/*,video/*"
+            onChange={handleMediaFilesChange}
+            className="mb-3"
+          />
+
+          {previewMedia.length > 0 && (
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
+              {previewMedia.map((media, idx) => (
+                <div key={idx} className="relative border rounded p-1 shadow">
+                  {media.type === 'image' ? (
+                    <img src={media.preview} alt={`media-${idx}`} className="w-full h-32 object-cover rounded" />
+                  ) : (
+                    <video src={media.preview} controls className="w-full h-32 object-cover rounded" />
+                  )}
+                  <button
+                    onClick={() => handleRemovePreview(idx)}
+                    className="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <button
@@ -244,51 +313,50 @@ export default function ProductsDashboard() {
                   d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
                 ></path>
               </svg>
-               Loading ...
+              Loading ...
             </>
-          ) : isEditing ? 'Updata Project' : 'Add Project '}
+          ) : isEditing ? 'Update Project' : 'Add Project'}
         </button>
       </form>
 
-     <h2 className="text-xl font-semibold mb-4"> All Projects</h2>
-<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-  {projects.map((p) => (
-    <div key={p.id} className="bg-white p-4 rounded-xl shadow hover:shadow-md transition">
-      {p.media_type === 'image' ? (
-        <img
-          src={`https://trafficstudio360.com/${p.file_path}`}
-          alt={p.title}
-          className="w-full h-48 object-cover rounded mb-4"
-        />
-      ) : (
-        <video
-          controls
-          className="w-full h-48 rounded mb-4"
-          src={`https://trafficstudio360.com/${p.file_path}`}
-        />
-      )}
-      <h3 className="text-lg font-semibold mb-1">{p.title}</h3>
-      <p className="text-sm text-gray-600 mb-2">{p.description}</p>
-      <p className="text-orange-500 text-sm font-semibold mb-2">التصنيف: {p.category_name}</p>
-      <p className="text-gray-400 text-xs mb-2">تاريخ الإضافة: {p.uploaded_at}</p>
-      <div className="mt-2 flex justify-between">
-        <button
-          onClick={() => handleEdit(p)}
-          className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-400"
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => handleDelete(p.id)}
-          className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500"
-        >
-          Delete
-        </button>
+      <h2 className="text-xl font-semibold mb-4">All Projects</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.map((p) => (
+          <div key={p.id} className="bg-white p-4 rounded-xl shadow hover:shadow-md transition">
+            {p.media_type === 'image' ? (
+              <img
+                src={`https://trafficstudio360.com/${p.file_path}`}
+                alt={p.title}
+                className="w-full h-48 object-cover rounded mb-4"
+              />
+            ) : (
+              <video
+                controls
+                className="w-full h-48 rounded mb-4"
+                src={`https://trafficstudio360.com/${p.file_path}`}
+              />
+            )}
+            <h3 className="text-lg font-semibold mb-1">{p.title}</h3>
+            <p className="text-sm text-gray-600 mb-2">{p.description}</p>
+            <p className="text-orange-500 text-sm font-semibold mb-2">التصنيف: {p.category_name}</p>
+            <p className="text-gray-400 text-xs mb-2">تاريخ الإضافة: {p.uploaded_at}</p>
+            <div className="mt-2 flex justify-between">
+              <button
+                onClick={() => handleEdit(p)}
+                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-400"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(p.id)}
+                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-500"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
-  ))}
-</div>
-
     </div>
   );
 }

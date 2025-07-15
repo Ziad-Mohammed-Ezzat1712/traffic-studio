@@ -55,7 +55,7 @@ export default function Portfolio() {
                   <img
                     src={`https://trafficstudio360.com/${project.file_path}`}
                     alt={`portfolio-${index + 1}`}
-                    className="w-full h-[430px] object-cover rounded-xl"
+                    className="w-full h-[430px] object-fill rounded-xl"
                   />
                   <div
                     className={`absolute bottom-0 left-0 w-full h-1/4 bg-black opacity-90 flex flex-col justify-center items-start p-4 transform transition-all duration-500 ease-in-out rounded-b-xl ${
