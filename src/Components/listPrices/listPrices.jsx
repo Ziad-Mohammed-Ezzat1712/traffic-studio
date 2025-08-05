@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import logo from '../../../public/logo.png'
 import footerImage from '../../../Images/prices/img40.jpg';
 import headerImage from '../../../Images/prices/img5.jpg';
-import Footer from '../Footer/Footer';
-import Navebar from '../Navebar/Navebar';
+import img15 from '../../../Images/prices/img15.jpg';
+import reels from '../../../Images/prices/reels.jpg';
+import products from '../../../Images/prices/products.jpg';
+import photoshoot from '../../../Images/prices/photoshoot.jpg';
+import fashion from '../../../Images/prices/fashion.jpg';
+import renting from '../../../Images/prices/renting.jpg';
 
 const images = [
-  { src: '/images/prices/img15.jpg', alt: 'Categories Overview' },
-  { src: '/images/prices/reels.jpg', alt: 'Categories Overview' },
-  { src: '/images/prices/products.jpg', alt: 'Personal Photoshoot Overview' },
-  { src: '/images/prices/photoshoot.jpg', alt: 'Photoshoot Plan 1' },
-  { src: '/images/prices/fashion.jpg', alt: 'Photoshoot Plan 2' },
-  { src: '/images/prices/renting.jpg', alt: 'Studio Renting Plan' },
-  // ضيف باقي الصور هنا
+  { src: img15, alt: 'Categories Overview' },
+  { src: reels, alt: 'Categories Overview' },
+  { src: products,  alt: 'Personal Photoshoot Overview' },
+  { src: photoshoot, alt: 'Photoshoot Plan 1' },
+  { src: fashion, alt: 'Photoshoot Plan 2' },
+  { src: renting, alt: 'Studio Renting Plan' },
 ];
 
 export default function ListPrices() {
