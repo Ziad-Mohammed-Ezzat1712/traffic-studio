@@ -147,7 +147,7 @@ export default function AllProjects() {
                   <img
                     src={`https://trafficstudio360.com/${proj.file_path}`}
                     alt={proj.title}
-                    className="w-full h-60  rounded mb-4"
+                    className="w-full h-[500px] object-cover  rounded mb-4"
                   />
                   <h3 className="font-semibold text-lg mb-1"><span className="text-lg text-black font-semibold ">Title :</span>  {proj.title}</h3>
                   <p className="text-sm text-gray-600 mb-2"><span className="text-xs text-black font-semibold ">Description :</span>  {proj.description}</p>

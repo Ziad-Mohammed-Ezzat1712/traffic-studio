@@ -13,6 +13,7 @@ import ProjectDetails from './Components/ProjectDetails/ProjectDetails';
 import AdminLogin from './Components/AdminLogin/AdminLogin';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import ViewBooking from './Components/ViewBooking/ViewBooking';
+import ListPrices from './Components/listPrices/listPrices';
 
 let x = createBrowserRouter([
   { index: true, element: <Home /> },
@@ -20,6 +21,7 @@ let x = createBrowserRouter([
   { path: "allproject", element: <AllProjects /> },
   { path: "*", element: <NotFound /> },
   { path: "/project/:id", element: <ProjectDetails /> },
+  { path: "/listprices", element: <ListPrices /> },
   { path: "/admin/login", element: <AdminLogin /> },
     
 

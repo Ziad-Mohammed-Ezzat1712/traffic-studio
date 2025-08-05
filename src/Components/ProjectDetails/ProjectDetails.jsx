@@ -124,15 +124,15 @@ export default function ProjectDetails() {
               <img
                 src={`https://trafficstudio360.com/${project.file_path}`}
                 alt={project.title}
-                className="max-w-[600px] w-full h-90  rounded-xl shadow-lg object-contain "
+                className="max-w-[1080px] w-full h-[600px]  rounded-xl shadow-lg object-cover "
               />
             </div>
 
             <div className="w-full my-16 md:w-3/4 space-y-10">
-              <h1 className="text-3xl font-bold text-orange-600"><span className=" text-3xl text-orange-600 font-semibold ">Title : </span>{project.title}</h1>
+              <h1 className="text-3xl font-bold text-orange-600"><span className=" text-3xl text-orange-600 font-semibold "> </span>{project.title}</h1>
               <p className="text-gray-700 leading-relaxed"> <span className=" text-xl text-black font-semibold ">Description : </span> {project.description}</p>
               <div className="text-sm  space-y-1">
-                <span className=" text-xl text-black font-semibold "><span className=" text-xl text-black font-semibold ">category : </span> {project.category_name}</span>
+                <span className=" text-xl text-black font-semibold "><span className=" text-xl text-black font-semibold ">Category : </span> {project.category_name}</span>
               </div>
              
             </div>
@@ -149,7 +149,8 @@ export default function ProjectDetails() {
               <video
                 src={media}
                 controls
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
+                
               />
             ) : (
               <img
