@@ -35,6 +35,9 @@ export default function Footer() {
             <Link to="/x" className="hover:text-gray-400">
               <i className="fab fa-x-twitter"></i>
             </Link>
+            <Link to="/listprices" className="hover:text-gray-400">
+              <i className="fab fa-x-twitter"></i>
+            </Link>
           </div>
         </div>
       </div>

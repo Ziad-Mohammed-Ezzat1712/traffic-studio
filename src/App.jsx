@@ -21,7 +21,7 @@ let x = createBrowserRouter([
   { path: "allproject", element: <AllProjects /> },
   { path: "*", element: <NotFound /> },
   { path: "/project/:id", element: <ProjectDetails /> },
-  { path: "/listprices", element: <ListPrices /> },
+  { path: "listprices", element: <ListPrices /> },
   { path: "/admin/login", element: <AdminLogin /> },
     
 
