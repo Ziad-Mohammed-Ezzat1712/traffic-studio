@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 
 export default function ProductsDashboard() {
   const [form, setForm] = useState({
@@ -82,6 +83,10 @@ export default function ProductsDashboard() {
     formData.append('category_name', form.category_name);
     formData.append('media_type', form.media_type);
     if (mainFile && mainFile.name) formData.append('file', mainFile);
+        if (form.video_url) {
+      formData.append('video_url', form.video_url);
+    }
+
 
     mediaFiles.forEach(file => {
       formData.append('media_files[]', file);
@@ -276,26 +281,81 @@ export default function ProductsDashboard() {
             onChange={handleMediaFilesChange}
             className="mb-3"
           />
+          
 
-          {previewMedia.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
-              {previewMedia.map((media, idx) => (
-                <div key={idx} className="relative border rounded p-1 shadow">
-                  {media.type === 'image' ? (
-                    <img src={media.preview} alt={`media-${idx}`} className="w-full h-32 object-cover rounded" />
-                  ) : (
-                    <video src={media.preview} controls className="w-full h-32 object-cover rounded" />
-                  )}
-                  <button
-                    onClick={() => handleRemovePreview(idx)}
-                    className="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+        {previewMedia.length > 0 && (
+  <>
+    <h3 className="text-sm font-semibold mb-2">الصور والفيديوهات الحالية (قابلة للسحب):</h3>
+
+    <DragDropContext
+      onDragEnd={(result) => {
+        if (!result.destination) return;
+
+        const reordered = Array.from(previewMedia);
+        const [moved] = reordered.splice(result.source.index, 1);
+        reordered.splice(result.destination.index, 0, moved);
+        setPreviewMedia(reordered);
+      }}
+    >
+      <Droppable droppableId="media-list" direction="horizontal">
+        {(provided) => (
+          <div
+            className="flex gap-4 overflow-x-auto p-2"
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+          >
+            {previewMedia.map((media, idx) => (
+              <Draggable key={`media-${idx}`} draggableId={`media-${idx}`} index={idx}>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                    className="relative border rounded p-1 shadow min-w-[8rem]"
                   >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-          )}
+                    {media.type === 'image' ? (
+                      <img
+                        src={media.preview}
+                        alt={`media-${idx}`}
+                        className="w-full h-32 object-cover rounded"
+                      />
+                    ) : (
+                      <video
+                        src={media.preview}
+                        controls
+                        className="w-full h-32 object-cover rounded"
+                      />
+                    )}
+                    <button
+                      type="button"
+                      onClick={() => handleRemovePreview(idx)}
+                      className="absolute top-1 right-1 bg-red-500 text-white text-xs px-2 py-1 rounded-full"
+                    >
+                      ×
+                    </button>
+                  </div>
+                )}
+              </Draggable>
+            ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  </>
+)}
+
+        </div>
+        <div>
+          <label className="block mb-1">Google Drive Video URL (Optional)</label>
+          <input
+            type="text"
+            name="video_url"
+            placeholder="https://drive.google.com/file/d/FILE_ID/view?usp=sharing"
+            className="w-full border rounded-lg px-4 py-2"
+            value={form.video_url || ""}
+            onChange={handleChange}
+          />
         </div>
 
         <button

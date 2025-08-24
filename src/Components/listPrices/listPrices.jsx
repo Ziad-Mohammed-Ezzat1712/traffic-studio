@@ -118,7 +118,7 @@ export default function ListPrices() {
   </div>
     <div className="container mx-auto mb-0 px-4 py-10">
        <div className='max-w-2xl mx-auto my-10  '>
-        <img src={headerImage} className='w-full h-[40%] object-contain' alt="" />
+        <img src={headerImage} className='w-full  rounded-xl h-[40%] object-contain' alt="" />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         {images.map((img, index) => (
@@ -135,7 +135,7 @@ export default function ListPrices() {
         ))}
       </div>
    <div className='max-w-2xl mx-auto my-10  '>
-        <img src={footerImage} className='w-full h-[40%] object-contain' alt="" />
+        <img src={footerImage} className='w-full  rounded-xl h-[40%] object-contain' alt="" />
       </div>
     </div>
  <div>

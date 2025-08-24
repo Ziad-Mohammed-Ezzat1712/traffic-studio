@@ -142,33 +142,51 @@ export default function ProjectDetails() {
     <h2 className="text-xl font-semibold mb-4 text-orange-600">More From This Project</h2>
     <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
       {galleryImages.map((media, idx) => {
-        const isVideo = media.endsWith('.mp4') || media.endsWith('.webm') || media.endsWith('.mov');
+        const isVideo = media.endsWith(".mp4") || media.endsWith(".webm") || media.endsWith(".mov");
+        
+
         return (
-          <div key={idx} className="w-full aspect-square overflow-hidden rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 cursor-pointer">
-            {isVideo ? (
-              <video
-                src={media}
-                controls
-                className="w-full h-full object-contain"
-                
-              />
-            ) : (
-              <img
-                src={media}
-                alt={`gallery-${idx}`}
-                onClick={() => setSelectedImage(media)}
-                className="w-full h-full object-cover"
-              />
-            )}
+          <div
+            key={idx}
+            className="w-full aspect-square overflow-hidden rounded-lg shadow-sm hover:scale-105 transition-transform duration-300 cursor-pointer"
+          >
+         {isVideo ? (
+  <video
+    src={media}
+    controls
+    className="w-full h-full object-contain"
+  />
+) : (
+  <img
+    src={media}
+    alt={`gallery-${idx}`}
+    onClick={() => setSelectedImage(media)}
+    className="w-full h-full object-cover"
+  />
+)}
+
           </div>
         );
       })}
+      
     </div>
   </div>
 )}
-
+{project.video_url_embed && (
+  <div className="w-full mt-10">
+    <iframe
+      src={project.video_url_embed}
+      title="project-video"
+      className="w-72  h-[200px] rounded-lg shadow-lg"
+      frameBorder="0"
+      allow="autoplay; encrypted-media"
+      allowFullScreen
+    />
+  </div>
+)}
         </div>
       </div>
+
 
       <div className='mb-10 ml-15'><Link to="/allproject">
                   <button className="border bg-orange-500 text-white font-bold rounded-full px-6 py-2 hover:bg-orange-600 hover:text-white transition duration-300 flex items-center gap-2">
