@@ -15,29 +15,22 @@ export default function Footer() {
         {/* Contact Info */}
         <div className="text-center text-md flex flex-col items-end">
           <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
-          <p className="mb-2">tarfficstudio@gmial.com</p>
-          <p className="mb-2">+20150 0929449‬
+          <p className="mb-2">info@adhamkaram.com</p>
+          <p className="mb-2">+20 109 649 6428‬
 </p>
           <p>2 Mohamed Zaki Barakat, 8th District, Nasr City, Cairo Governorate 
 </p>
 
           {/* Social Icons */}
-          <div className="flex gap-4 mt-4 text-xl text-white">
-            <Link to="/facebook" className="hover:text-blue-500">
-              <i className="fab fa-facebook-f"></i>
+          <div className="flex gap-12 mt-4 text-xl text-white">
+            <Link to="https://www.facebook.com/profile.php?id=61577701979011" target='_blank' className="hover:text-blue-500">
+              <i className="fab fa-facebook-f" ></i>
             </Link>
-            <Link to="/instagram" className="hover:text-pink-500">
+            <Link to="https://www.instagram.com/trafficstudio360/" target='_blank' className="hover:text-pink-500">
               <i className="fab fa-instagram"></i>
             </Link>
-            <Link to="/linkedin" className="hover:text-blue-400">
-              <i className="fab fa-linkedin-in"></i>
-            </Link>
-            <Link to="/x" className="hover:text-gray-400">
-              <i className="fab fa-x-twitter"></i>
-            </Link>
-            {/* <Link to="/listprices" className="text-black">
-              <i className="fab fa-x-twitter"></i>
-            </Link> */}
+            
+        
           </div>
         </div>
       </div>

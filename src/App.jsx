@@ -14,6 +14,7 @@ import AdminLogin from './Components/AdminLogin/AdminLogin';
 import ProtectedRoute from './Components/ProtectedRoute/ProtectedRoute';
 import ViewBooking from './Components/ViewBooking/ViewBooking';
 import ListPrices from './Components/listPrices/listPrices';
+import WhatsAppButton from './Components/WhatsAppButton/WhatsAppButton';
 
 let x = createBrowserRouter([
   { index: true, element: <Home /> },
@@ -40,7 +41,13 @@ let x = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={x} />;
+  return <>
+
+     <WhatsAppButton/>
+        <RouterProvider router={x} />
+  </>
+
+   ;
 }
 
 export default App;

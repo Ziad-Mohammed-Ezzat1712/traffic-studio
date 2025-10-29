@@ -17,34 +17,34 @@ export default function Navebar() {
           {/* Nav links (centered) */}
           <div className="hidden md:flex  justify-center flex-1">
           <ul className="flex items-center text-lg text-white px-6 py-2 gap-6 font-semibold">
-  <li className='px-10'>
+  <li className='px-8'>
     <Link to="/#header" className="text-white hover:text-orange-500 font-bold">
       Home
     </Link>
   </li>
-    <li className='px-10'>
+    <li className='px-8'>
     <Link to="/#about" className="text-white hover:text-orange-500">
       About
     </Link>
   </li>
-   <li className='px-10'>
+   <li className='px-8'>
     <Link to="/#services" className="text-white hover:text-orange-500">
        Services
     </Link>
   </li>
-  <li className='px-10'>
+  <li className='px-8'>
     <Link to="/#portfolio" className="text-white hover:text-orange-500">
       Portfolio
     </Link>
   </li>
  
 
-  <li className='px-10'>
+  <li className='px-8'>
     <Link to="/#testimonials" className="text-white hover:text-orange-500">
       Testimonials
     </Link>
   </li>
-  <li className='px-10'>
+  <li className='px-8'>
     <Link to="/#faqs" className="text-white hover:text-orange-500">
      Q&A
     </Link>
